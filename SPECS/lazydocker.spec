@@ -18,6 +18,7 @@ Summary:        A simple terminal UI for both docker and docker-compose, written
 Group:          Applications/System
 License:        MIT
 URL:            https://github.com/%{gh_user}/%{name}
+Source:         https://github.com/%{gh_user}/%{name}/archive/v%{gh_version}.tar.gz
 BuildRequires:  golang
 
 %description
@@ -27,19 +28,9 @@ terminal window with every common command living one keypress away (and the abil
 well). Lazydocker's goal is to make that dream a reality.
 
 %prep
-wget https://github.com/%{gh_user}/%{name}/archive/v%{gh_version}.tar.gz
-tar xzf v%{gh_version}.tar.gz
-mkdir -p %{_builddir}/src/github.com/%{gh_user}/
-cd %{_builddir}/src/github.com/%{gh_user}/
-ln -snf %{_builddir}/%{name}-%{gh_version} %{name}
-cd %{name}
+%setup -qn %{name}-%{gh_version}
 
 %build
-export GOPATH="%{_builddir}"
-export PATH=$PATH:"%{_builddir}"/bin
-cd %{_builddir}/src/github.com/%{gh_user}/%{name}
-export LDFLAGS="${LDFLAGS} -X main.commit=%{gh_short} -X main.date=$(date -u +%Y%m%d.%H%M%%S) -X main.version=%{version}"
-
 %gobuild -o %{_builddir}/bin/%{name}
 
 %install
@@ -47,10 +38,10 @@ install -Dm0755 %{_builddir}/bin/%{name} %{buildroot}%{_bindir}/%{name}
 
 %files
 %{_bindir}/%{name}
-%doc %{name}-%{gh_version}/LICENSE %{name}-%{gh_version}/*.md %{name}-%{gh_version}/docs/*.md
+%doc LICENSE *.md docs/*.md
 
 %changelog
-* Mon Feb 3 2019 Jamie Curnow <jc@jc21.com> 0.8.0-1
+* Mon Feb 3 2020 Jamie Curnow <jc@jc21.com> 0.8.0-1
 - v0.8.0
 
 * Mon Nov 18 2019 Jamie Curnow <jc@jc21.com> 0.7.6-1
