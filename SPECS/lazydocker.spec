@@ -1,9 +1,9 @@
 %define debug_package %{nil}
 
 %global gh_user     jesseduffield
-%global gh_commit   ff0a53bfadfb1bfef5a0e3db023d57fed36fe4eb
+%global gh_commit   6fd5337cc272289463eb562606e67515f48b4aff
 %global gh_short    %(c=%{gh_commit}; echo ${c:0:7})
-%global gh_version  0.10
+%global gh_version  0.12
 
 # see https://fedoraproject.org/wiki/PackagingDrafts/Go#Build_ID
 %global _dwz_low_mem_die_limit 0
@@ -12,7 +12,7 @@
 %endif
 
 Name:           lazydocker
-Version:        0.10.0
+Version:        0.12.0
 Release:        1%{?dist}
 Summary:        A simple terminal UI for both docker and docker-compose, written in Go with the gocui library.
 Group:          Applications/System
@@ -41,6 +41,9 @@ install -Dm0755 %{_builddir}/bin/%{name} %{buildroot}%{_bindir}/%{name}
 %doc LICENSE *.md docs/*.md
 
 %changelog
+* Thu Mar 25 2021 Jamie Curnow <jc@jc21.com> 0.12.0-1
+- v0.12.0
+
 * Mon Nov 16 2020 Jamie Curnow <jc@jc21.com> 0.10.0-1
 - v0.10.0
 
