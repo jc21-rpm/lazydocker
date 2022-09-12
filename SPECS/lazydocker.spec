@@ -13,7 +13,7 @@
 
 Name:           lazydocker
 Version:        0.12.0
-Release:        1%{?dist}
+Release:        1
 Summary:        A simple terminal UI for both docker and docker-compose, written in Go with the gocui library.
 Group:          Applications/System
 License:        MIT
