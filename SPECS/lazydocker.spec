@@ -7,9 +7,6 @@
 
 # see https://fedoraproject.org/wiki/PackagingDrafts/Go#Build_ID
 %global _dwz_low_mem_die_limit 0
-%if ! 0%{?gobuild:1}
-%define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n') " -i -v -x %{?**};
-%endif
 
 Name:           lazydocker
 Version:        0.23.3
@@ -31,7 +28,7 @@ well). Lazydocker's goal is to make that dream a reality.
 %setup -qn %{name}-%{gh_version}
 
 %build
-%gobuild -o %{_builddir}/bin/%{name}
+go build -o %{_builddir}/bin/%{name}
 
 %install
 install -Dm0755 %{_builddir}/bin/%{name} %{buildroot}%{_bindir}/%{name}
